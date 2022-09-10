@@ -78,17 +78,6 @@ public class DataLoader implements CommandLineRunner {
                             roleRepository.findAll()
                     )
             );
-            authRepository.save(
-                    new User(
-                            "bolta",
-                            "teacher",
-                            "+998990000000",
-                            passwordEncoder.encode("Ketmon123"),
-                            Collections.singletonList(roleRepository.findById(2).orElseThrow(() -> {
-                                return new ResourceNotFoundException("getRole");
-                            }))
-                    )
-            );
         }
     }
 }

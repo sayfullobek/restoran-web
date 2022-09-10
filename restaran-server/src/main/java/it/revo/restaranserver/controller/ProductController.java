@@ -39,4 +39,16 @@ public class ProductController {
         List<ProductDto> productByCategory = productService.getProductByCategory(id);
         return ResponseEntity.ok(productByCategory);
     }
+
+    @DeleteMapping("/{id}")
+    public HttpEntity<?> deleteProduct(@PathVariable UUID id) {
+        ApiResponse apiResponse = productService.delProduct(id);
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @GetMapping("/{id}")
+    public HttpEntity<?> getOneProduct(@PathVariable UUID id) {
+        Product one = productService.getOne(id);
+        return ResponseEntity.ok(one);
+    }
 }

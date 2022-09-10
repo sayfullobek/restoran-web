@@ -37,7 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtErrors jwtErrors;
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -80,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/auth/register", "/api/auth/login", "/api/category/**", "/api/attachment/**", "/api/product/**", "/api/aware/**")
+                .antMatchers("/api/auth/register", "/api/auth/login", "/api/category/**", "/api/attachment/**", "/api/product/**", "/api/aware/**", "/api/zakaz/**")
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/language")
                 .permitAll()

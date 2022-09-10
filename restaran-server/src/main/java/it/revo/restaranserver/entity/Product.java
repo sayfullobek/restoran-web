@@ -24,6 +24,6 @@ public class Product extends AbsNameEntity {
     @Column(length = 10000)
     private String description;
 
-    @Column(nullable = false, unique = true, length = 10000)
+    @Column(nullable = false, unique = true, length = 100000000)
     private String img;
 }

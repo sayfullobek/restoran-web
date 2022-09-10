@@ -1,10 +1,9 @@
 package it.revo.restaranserver.payload;
 
-import lombok.AllArgsConstructor;
+import it.revo.restaranserver.entity.Category;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import java.util.UUID;
 
 @Data
@@ -22,6 +21,8 @@ public class ProductDto {
 
     private UUID categoryId;
 
+    private Category category;
+
     private String description;
 
     private String img;
@@ -36,13 +37,13 @@ public class ProductDto {
         this.img = img;
     }
 
-    public ProductDto(UUID id, String nameUz, String nameRu, String nameEn, Double price, UUID categoryId, String description, String img) {
+    public ProductDto(UUID id, String nameUz, String nameRu, String nameEn, Double price, Category category, String description, String img) {
         this.id = id;
         this.nameUz = nameUz;
         this.nameRu = nameRu;
         this.nameEn = nameEn;
         this.price = price;
-        this.categoryId = categoryId;
+        this.category = category;
         this.description = description;
         this.img = img;
     }

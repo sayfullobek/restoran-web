@@ -13,19 +13,19 @@ export const Sidebar = ({toggle, clickToggle}) => {
         {
             title: "category",
             link: '/admin/category',
-            icon: "fa-solid fa-list-dropdown"
+            icon: "bi bi-bookmark-plus"
         }, {
             title: "product",
             link: "/admin/product",
-            icon: ""
-        },{
+            icon: "bi bi-bag-plus"
+        }, {
             title: "aware",
             link: "/admin/aware",
-            icon: ""
+            icon: "bi bi-card-list"
         }, {
             title: "menyu",
             link: "/",
-            icon: ""
+            icon: "bi bi-house-door"
         }
     ]
 
@@ -41,8 +41,8 @@ export const Sidebar = ({toggle, clickToggle}) => {
                                 className={location === item.link ? `nav-link pb-0 bg-color row justify-content-center align-items-center` : 'nav-link pb-0 row justify-content-center align-items-center'}
                                 to={item.link} onClick={isMobile && clickToggle}>
                                     <span className={'card-title pb-0 pt-0'}>
-                                        <i className={location === item.link ? `${item.icon} text-white` : `${item.icon}`}
-                                           style={{fontSize: '26px'}}/>
+                                        <i className={location === item.link ? `${item.icon} text-white text-center` : `${item.icon} text-center`}
+                                           style={{fontSize: '30px'}}/>
                                     </span>
                                 <span
                                     className={location === item.link ? 'text-white card-title pb-0 pt-0' : 'card-title pb-0 pt-0'}>{item.title}

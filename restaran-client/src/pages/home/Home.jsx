@@ -1,11 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
-import {Nav} from "reactstrap";
-import {Navbar} from "../../component/navbar/Navbar";
-import {embeddedGet} from "../../api/service/Service";
-import {MenyuJon} from "./MenyuJon";
+import React from "react";
 
-export const Home = ({search ,setSearch}) => {
+export const Home = ({search, setSearch}) => {
 
     return (
         <>
@@ -16,7 +11,7 @@ export const Home = ({search ,setSearch}) => {
                         fontWeight: 'bold',
                         fontSize: '24px',
                         border: '2px solid white',
-                        borderRadius: '26px',
+                        borderRadius: '10px',
                         backgroundColor: 'rgba(250,250,250,.6)'
                     }}
                            value={search} onChange={e => setSearch(e.target.value)}/>

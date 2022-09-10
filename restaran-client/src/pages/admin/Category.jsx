@@ -3,7 +3,7 @@ import {Loader} from "../../component/loader/Loader";
 import {Outlet} from "react-router-dom";
 import {PageTitle} from "../../component/pageTitle/PageTitle";
 import {Pagination} from "../../component/pagenation/Pageination";
-import {embeddedGet, categoryService} from "../../api/service/Service";
+import {categoryService, embeddedGet} from "../../api/service/Service";
 import {deleteModal} from "../../api/modal/deleteModal";
 
 export const Category = () => {
@@ -33,7 +33,7 @@ export const Category = () => {
     const filter = data.filter(item => item.nameUz.toLowerCase().includes(search.toLowerCase()));
 
     const deleteCategory = async (e, id) => {
-        await deleteModal(id)
+        await deleteModal(id, "category")
         getAll()
     }
 

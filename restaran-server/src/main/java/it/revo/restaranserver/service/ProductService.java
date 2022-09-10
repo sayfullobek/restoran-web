@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -48,12 +49,30 @@ public class ProductService {
                     product.getNameRu(),
                     product.getNameEn(),
                     product.getPrice(),
-                    product.getCategory().getId(),
+                    product.getCategory(),
                     product.getDescription(),
                     product.getImg()
             );
             resProductsList.add(resProducts);
         }
         return resProductsList;
+    }
+
+    public ApiResponse delProduct(UUID uuid) {
+        Optional<Product> byId = productRepository.findById(uuid);
+        if (byId.isPresent()) {
+            Product product = byId.get();
+            productRepository.delete(product);
+            return new ApiResponse("successfully deleted product", true);
+        }
+        return new ApiResponse("this is not found id", false);
+    }
+
+    public Product getOne(UUID uuid) {
+        Optional<Product> byId = productRepository.findById(uuid);
+        if (byId.isPresent()) {
+            return byId.get();
+        }
+        return null;
     }
 }

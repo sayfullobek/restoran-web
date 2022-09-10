@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -36,7 +35,7 @@ public class AuthController {
     public HttpEntity<?> register(@RequestBody ReqRegister reqRegister) {
         ApiResponse response = authService.register(reqRegister);
         return ResponseEntity.status(response.isSuccess() ? HttpStatus.CREATED : HttpStatus.CONFLICT)
-                .body(response.isSuccess() ? new ApiResponse(response.getMessage(), true, generateToken(reqRegister.getPhoneNumber())) : response);
+                .body(response.isSuccess() ? new ApiResponse(response.getMessage(), true, generateToken(reqRegister.getPhoneNumber(), "register")) : response);
     }
 
 
@@ -46,13 +45,13 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(request.getPhoneNumber(), request.getPassword())
         );
         User user = authRepository.findUserByPhoneNumber(request.getPhoneNumber()).orElseThrow(() -> new ResourceNotFoundException("getUser"));
-        ResToken resToken = new ResToken(generateToken(request.getPhoneNumber()));
+        ResToken resToken = new ResToken(generateToken(request.getPhoneNumber(), "login"));
         System.out.println(ResponseEntity.ok(getMal(user, resToken)));
         return ResponseEntity.ok(getMal(user, resToken));
     }
 
-    private String generateToken(String phoneNumber) {
-        User user = authRepository.findUserByPhoneNumber(phoneNumber).orElseThrow(() -> new UsernameNotFoundException("getUser"));
+    private String generateToken(String phoneNumber, String status) {
+        User user = authRepository.findUserByPhoneNumber(status.equals("register") ? "+".concat(phoneNumber) : phoneNumber).orElseThrow(() -> new UsernameNotFoundException("getUser"));
         return jwtTokenProvider.generateToken(user.getId());
     }
 
@@ -74,13 +73,5 @@ public class AuthController {
     @DeleteMapping("/{id}")
     public HttpEntity<?> deleteUser(@PathVariable UUID id) {
         return ResponseEntity.ok(authService.deleteUser(id));
-    }
-
-
-    @PutMapping("/edit/{id}")
-    public HttpEntity<?> editUser(@PathVariable UUID id, @RequestBody ReqRegister reqRegister) {
-        ApiResponse response = authService.editUser(id, reqRegister);
-        return ResponseEntity.status(response.isSuccess() ? HttpStatus.CREATED : HttpStatus.CONFLICT)
-                .body(response.isSuccess() ? new ApiResponse(response.getMessage(), true, generateToken(reqRegister.getPhoneNumber())) : response);
     }
 }

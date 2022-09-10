@@ -3,7 +3,6 @@ package it.revo.restaranserver.payload;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.http.codec.json.KotlinSerializationJsonEncoder;
 
 @Data
 @AllArgsConstructor

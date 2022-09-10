@@ -1,6 +1,7 @@
 package it.revo.restaranserver.service;
 
 import it.revo.restaranserver.entity.User;
+import it.revo.restaranserver.entity.enums.RoleName;
 import it.revo.restaranserver.payload.ApiResponse;
 import it.revo.restaranserver.payload.ReqRegister;
 import it.revo.restaranserver.repository.AuthRepository;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -36,7 +38,6 @@ public class AuthService implements UserDetailsService {
 
     public ApiResponse register(ReqRegister request) {
         try {
-//            PasswordEncoder passwordEncoder = new ;
             if (request.getPassword().equals(request.getPrePassword())) {
                 if (!authRepository.existsByPhoneNumber(request.getPhoneNumber())) {
                     User user = new User(
@@ -44,7 +45,7 @@ public class AuthService implements UserDetailsService {
                             request.getLastName(),
                             "+" + request.getPhoneNumber(),
                             passwordEncoder().encode(request.getPassword()),
-                            Collections.singletonList(roleRepository.findById(request.getRoleId()).orElseThrow(() -> new ResourceNotFoundException("getRole")))
+                            roleRepository.findRoleByRoleName(RoleName.USER)
                     );
                     authRepository.save(user);
                     return new ApiResponse("User saqlandi", true);
@@ -71,11 +72,7 @@ public class AuthService implements UserDetailsService {
 
     public User getOneUser(UUID id) {
         Optional<User> byId = authRepository.findById(id);
-        if (byId.isPresent()) {
-            User user = byId.get();
-            return user;
-        }
-        return null;
+        return byId.orElse(null);
     }
 
     public ApiResponse deleteUser(UUID uuid) {
@@ -98,7 +95,7 @@ public class AuthService implements UserDetailsService {
                 user.setLastName(reqRegister.getLastName());
                 user.setPhoneNumber("+" + reqRegister.getPhoneNumber());
                 user.setPassword(reqRegister.getPassword());
-                user.setRoles(Collections.singletonList(roleRepository.findById(reqRegister.getRoleId()).orElseThrow(() -> new ResourceNotFoundException("getRole"))));
+                user.setRoles(roleRepository.findRoleByRoleName(RoleName.USER));
                 authRepository.save(user);
                 return new ApiResponse("successfully saved user", true);
             } else {

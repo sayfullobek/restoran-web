@@ -4,9 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,6 +19,4 @@ public class ReqRegister {
     private String password;
 
     private String prePassword;
-
-    private Integer roleId;
 }

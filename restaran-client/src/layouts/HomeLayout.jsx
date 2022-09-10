@@ -11,6 +11,7 @@ export const HomeLayout = ({t, changeLanguage}) => {
     const [product, setProduct] = useState([])
     const [search, setSearch] = useState('')
 
+
     const getProduct = async () => {
         try {
             await embeddedGet("product", setProduct, "data")

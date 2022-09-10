@@ -13,13 +13,13 @@ export const Header = ({clickToggle}) => {
                     <i className="fas fa-bars toggle-sidebar-btn text-success" style={{fontSize: '25px'}}
                        onClick={clickToggle}/>
                 </div>
-               <div className="col-9 col-md-10 d-flex align-items-center justify-content-center">
-                   <Link to="/admin" className="logo">
+                <div className="col-9 col-md-10 d-flex align-items-center justify-content-center">
+                    <Link to="/admin" className="logo">
                     <span className="text-uppercase">
                         <h1 className="back">Dashboard</h1>
                     </span>
-                   </Link>
-               </div>
+                    </Link>
+                </div>
                 <div className="col-2 col-md-1 d-flex align-items-center justify-content-center">
                     <a className="dropdown-item d-flex align-items-center" style={{cursor: 'pointer'}}
                        onClick={() => {

@@ -3,7 +3,7 @@ import {Loader} from "../../component/loader/Loader";
 import {Outlet} from "react-router-dom";
 import {PageTitle} from "../../component/pageTitle/PageTitle";
 import {Pagination} from "../../component/pagenation/Pageination";
-import {categoryService, embeddedGet, productService} from "../../api/service/Service";
+import {embeddedGet, productService} from "../../api/service/Service";
 import {deleteModal} from "../../api/modal/deleteModal";
 
 export const Product = () => {
@@ -42,7 +42,7 @@ export const Product = () => {
     const filter = data.filter(item => item.nameUz.toLowerCase().includes(search.toLowerCase()));
 
     const deleteProduct = async (e, id) => {
-        await deleteModal(id)
+        await deleteModal(id, "product")
         getAll()
     }
 
@@ -191,7 +191,6 @@ const CreateProduct = ({getAll, category}) => {
             description,
             img
         }
-        console.log(data)
         await productService(data, undefined)
         getAll()
     }
@@ -237,7 +236,7 @@ const CreateProduct = ({getAll, category}) => {
                         </label>
                         <select name="categoryId" id="categoryId" className="form-select" value={categoryId}
                                 onChange={e => setCategoryId(e.target.value)}>
-                            <option value="null" disabled={true}>tanlang</option>
+                            <option value="null" selected={true}>tanlang</option>
                             {category.map(item => (
                                 <option value={item.id}>{item.nameUz}</option>
                             ))}

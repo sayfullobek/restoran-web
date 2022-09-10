@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {embeddedGet, awareService} from "../../api/service/Service";
+import {awareService, embeddedGet} from "../../api/service/Service";
 import {deleteModal} from "../../api/modal/deleteModal";
 import {Outlet} from "react-router-dom";
 import {PageTitle} from "../../component/pageTitle/PageTitle";
@@ -33,8 +33,8 @@ export const Aware = () => {
     const filter = data.filter(item => item.nameUz.toLowerCase().includes(search.toLowerCase()));
 
     const deleteAware = async (e, id) => {
-        await deleteModal(id)
-        getAll()
+        await deleteModal(id, "aware")
+        await getAll()
     }
     return (
         <>

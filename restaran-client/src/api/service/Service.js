@@ -1,6 +1,5 @@
 import {baseConfigurer} from "../baseConfig/baseConfigurer";
 import {toast} from "react-toastify";
-import * as url from "url";
 
 export const categoryService = async (data, id) => {
     if (data !== undefined) {
@@ -87,30 +86,43 @@ export const awareService = async (data, id) => {
         }
     }
 
-    if (data.awareStatus === "null" || data.awareStatus === null || data.awareStatus === undefined || data.awareStatus === "undefined"){
+    if (data.awareStatus === "null" || data.awareStatus === null || data.awareStatus === undefined || data.awareStatus === "undefined") {
         return toast.error("statusni tanlash shart")
     }
 
-        try {
-            if (id === "" || id === null || id === undefined || id === "undefined") {
-                await baseConfigurer.doPost("aware", data)
-                toast.success("aware saqlandi")
-            } else {
-                await baseConfigurer.doPut(id, "aware", data)
-                toast.success("aware tahrirlandi")
-            }
-            if (data) {
-                setTimeout(() => {
-                    window.location.reload()
-                }, 2000)
-            }
-        } catch (err) {
-            if (err.response.status === 409) {
-                toast.error("bunday malumot mavjud")
-            } else {
-                toast.error("xatolik")
-            }
+    try {
+        if (id === "" || id === null || id === undefined || id === "undefined") {
+            await baseConfigurer.doPost("aware", data)
+            toast.success("aware saqlandi")
+        } else {
+            await baseConfigurer.doPut(id, "aware", data)
+            toast.success("aware tahrirlandi")
         }
+        if (data) {
+            setTimeout(() => {
+                window.location.reload()
+            }, 2000)
+        }
+    } catch (err) {
+        if (err.response.status === 409) {
+            toast.error("bunday malumot mavjud")
+        } else {
+            toast.error("xatolik")
+        }
+    }
+}
+
+export const zakazQil = async (data, path) => {
+    if (data.nechtaProduct.length === 0) {
+        return null
+    }
+    try {
+        const res = await baseConfigurer.doPost("zakaz", data)
+        if (res.status === 200) {
+            return path('/admin')
+        }
+    } catch (err) {
+    }
 }
 
 export const embeddedGet = async (url, setData, status) => {
@@ -126,9 +138,9 @@ export const embeddedGet = async (url, setData, status) => {
     }
 }
 
-export const deleteService = async (id) => {
+export const deleteService = async (id, status) => {
     try {
-        await baseConfigurer.doDelete(id, "category")
+        await baseConfigurer.doDelete(id, status)
         toast.success("malumot o'chirlidi")
     } catch (err) {
         toast.error("xatolik")

@@ -1,6 +1,5 @@
 package it.revo.restaranserver.entity;
 
-import it.revo.restaranserver.entity.template.AbsEntity;
 import it.revo.restaranserver.entity.template.AbsNameEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

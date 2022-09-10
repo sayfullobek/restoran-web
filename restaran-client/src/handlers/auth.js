@@ -7,3 +7,4 @@ export const logout = (navigate, col) => {
     localStorage.clear();
     navigate('/')
 }
+
