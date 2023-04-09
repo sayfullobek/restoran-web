@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.Optional;
 import java.util.UUID;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin("http://127.0.0.1:5173")
 public interface AuthRepository extends JpaRepository<User, UUID> {
     boolean existsByPhoneNumber(String phoneNumber);
 

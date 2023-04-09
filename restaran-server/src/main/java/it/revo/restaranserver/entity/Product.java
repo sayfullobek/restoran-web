@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "products")
 public class Product extends AbsNameEntity {
     @NotNull
     private Double price;

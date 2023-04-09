@@ -70,9 +70,6 @@ public class ProductService {
 
     public Product getOne(UUID uuid) {
         Optional<Product> byId = productRepository.findById(uuid);
-        if (byId.isPresent()) {
-            return byId.get();
-        }
-        return null;
+        return byId.orElse(null);
     }
 }

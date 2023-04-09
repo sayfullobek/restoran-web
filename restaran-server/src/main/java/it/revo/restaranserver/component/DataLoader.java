@@ -8,17 +8,12 @@ import it.revo.restaranserver.entity.enums.RoleName;
 import it.revo.restaranserver.repository.AuthRepository;
 import it.revo.restaranserver.repository.AwareRepository;
 import it.revo.restaranserver.repository.RoleRepository;
-import net.bytebuddy.utility.nullability.AlwaysNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity

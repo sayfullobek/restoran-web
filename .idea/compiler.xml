@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="restaran-server" target="11" />
+      <module name="restaran-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
